@@ -26,7 +26,7 @@
     .notification-container {
         text-align: center;
         position: fixed;
-        top: 70px;
+        bottom: 10px;
         right: 0;
         background: linear-gradient(to right, #16c0b0, #84cf6a);
         font-weight: 600;
