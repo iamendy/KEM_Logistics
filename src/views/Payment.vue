@@ -2,7 +2,7 @@
     <div>
         <h4> WE'VE ARRIVED! </h4>
         <h5> We do hope you enjoyed the ride! Now here's your route summary and bill:</h5>
-        <p><i class="fa fa-user-tag space"></i> Your Rider: <i> Mighty Joe </i> </p>
+        <p><i class="fa fa-user-tag space"></i> Your Rider: <i>Lola Adeogun </i> </p>
         <div>
             <p><i class="fa fa-ticket-alt space"></i> Invoice ID: {{myRef}}</p>
             <p><i class="fa fa-route space"></i> 8 Providence Street, Lekki - 10 Greenville estate, Ajah</p>
@@ -16,7 +16,7 @@
         </div>
 
         <br> <br>
-        <i style="color: #ccc"> This is the customer app page. When He/She clicks on "pay for ride button', and makes payment, the Payment will be split in the ratio 20:80 (as defined by KEM Logistics on the merchant dashboard) between KEM Logistics and Mighty Joe respectively (after rave charge is deducted)</i>
+        <i style="color: #ccc"> This is the customer app page. When He/She clicks on "pay for ride button', and makes payment, the Payment will be split as defined by KEM Logistics their drivers</i>
         <br>
     </div>
 </template>
@@ -45,7 +45,9 @@
                     txref: this.myRef,
                     subaccounts: [
                         {
-                            id: "RS_178E1017821CCC6F4145C10FC3E0829A"
+                            id: "RS_92DF547567BF7B558ACE8174A91662A2",
+                            transaction_charge_type: 'percentage',
+                            transaction_charge: 0.1
                         }
                     ],
                     meta: [{

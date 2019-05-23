@@ -323,3 +323,6 @@ select::ms-expand {
 #nprogress .spinner{
     display: none;
 }
+div.summary{
+    text-align: center;
+}
