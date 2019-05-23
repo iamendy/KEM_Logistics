@@ -11,7 +11,7 @@
             <h6>Amount paid: N{{summary.tx.amount}}</h6>
             <h6> Rave Fees: N{{summary.tx.appfee}} @ 1.4% </h6>
             <h6>KLog share: N{{kLog}} @ 10% </h6>
-            <h6>Driver(Mighty Joe) share: N{{driver}} @ 90% </h6>
+            <h6>Driver(Lola Adeogun) share: N{{driver}} @ 90% </h6>
         </div>
     </div>
 </template>
