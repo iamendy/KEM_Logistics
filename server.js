@@ -1,5 +1,5 @@
 const express = require('express');
-//const secure = require('express-force-https');
+const secure = require('express-force-https');
 const serveStatic = require("serve-static");
 const path = require('path');
 
@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 
 //create middleware to handle serving the app
-//app.use(secure);
+app.use(secure);
 app.use('/', serveStatic( path.join(__dirname, '/dist')));
 
 // Catch all routes and redirect to the index file
