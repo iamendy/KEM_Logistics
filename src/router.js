@@ -44,10 +44,6 @@ export default new Router({
           path: '*',
           name: 'error404',
           component: Error404,
-          props: true,
-          beforeEnter(){
-
-          }
       },
   ]
 })
