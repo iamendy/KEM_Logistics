@@ -11,7 +11,6 @@ body {
 }
 #app {
     box-sizing: border-box;
-    width: 500px;
     padding: 0 20px 20px;
     margin: 0 auto;
 }
@@ -25,6 +24,7 @@ a {
     font-weight: 600;
     background-color: transparent;
 }
+
 img {
     border-style: none;
     width: 100%;
@@ -308,4 +308,18 @@ select::ms-expand {
 .space{
     margin-right: 10px;
     color: #16c0b0;
+}
+#nprogress .bar{
+    background: #39b982;
+}
+#nprogress .spinner-icon{
+    border-top-color: #39b982;
+    border-left-color: #39b982;
+}
+#nprogress .peg{
+    box-shadow: 0 0 10px #39b982, 0 0 5px #39b982;
+
+}
+#nprogress .spinner{
+    display: none;
 }

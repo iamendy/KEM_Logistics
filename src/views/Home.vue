@@ -9,7 +9,7 @@
 
         <h6> App built with vue.. because i noticed Rave loves vue, and i do too! ;)</h6>
 
-        <p class="bottom">  powered by: <a href="https://flutterwave.com" class="flutter"> Flutterwave</a></p>
+        <p class="bottom">  powered by: <a href="https://flutterwave.com" class="flutter" target="_blank"> Flutterwave</a></p>
 
     </div>
 </template>

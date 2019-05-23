@@ -1,10 +1,8 @@
 <template>
     <div>
         <h4> WE'VE ARRIVED! </h4>
-        <p><i class="fa fa-user-tag space"></i> Your Rider: <b> Mighty Joe </b> </p>
-
         <h5> We do hope you enjoyed the ride! Now here's your route summary and bill:</h5>
-
+        <p><i class="fa fa-user-tag space"></i> Your Rider: <i> Mighty Joe </i> </p>
         <div>
             <p><i class="fa fa-ticket-alt space"></i> Invoice ID: {{myRef}}</p>
             <p><i class="fa fa-route space"></i> 8 Providence Street, Lekki - 10 Greenville estate, Ajah</p>
@@ -16,6 +14,10 @@
         <div class="btn-wrapper">
             <button class="button -fill-gradient" type="button" @click="payWithRave">Pay for Ride</button>
         </div>
+
+        <br> <br>
+        <i style="color: #ccc"> This is the customer app page. When He/She clicks on "pay for ride button', and makes payment, the Payment will be split in the ratio 20:80 (as defined by KEM Logistics on the merchant dashboard) between KEM Logistics and Mighty Joe respectively (after rave charge is deducted)</i>
+        <br>
     </div>
 </template>
 
@@ -34,7 +36,7 @@
             payWithRave() {
                 var x = getpaidSetup({
                     PBFPubKey: this.apiPublickey,
-                    customer_email: "hr@flutterwave.com",
+                    customer_email: "me@example.com",
                     amount: 1500,
                     currency: "NGN",
                     customer_phone: '07066425471',
@@ -43,7 +45,7 @@
                     txref: this.myRef,
                     subaccounts: [
                         {
-                            id: "RS_178E1017821CCC6F4145C10FC3E0829A" // This assumes you have setup your commission on the dashboard.
+                            id: "RS_178E1017821CCC6F4145C10FC3E0829A"
                         }
                     ],
                     meta: [{

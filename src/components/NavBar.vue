@@ -1,6 +1,6 @@
 <template>
   <div id="nav" class="nav">
-    <router-link :to="{ name: 'home' }" class="brand"> KEM Logistics </router-link>
+    <router-link :to="{ name: 'home' }" class="brand"> KLog </router-link>
     <nav>
       <router-link :to="{ name: 'bvn' }"> BVN Checker </router-link> |
       <router-link :to="{ name: 'payment' }"> Pay for ride </router-link>

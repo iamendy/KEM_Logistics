@@ -6,10 +6,11 @@ import BVN from './views/BvnChecker.vue'
 import PaymentOK from './views/PaymentOK.vue'
 import PaymentFailed from './views/PaymentFailed.vue'
 import Error404 from './views/Error404.vue'
+import Nprogress from 'nprogress';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -46,4 +47,13 @@ export default new Router({
           component: Error404,
       },
   ]
-})
+});
+
+router.beforeEach((routeTo, routeFrom, next) => {
+    Nprogress.start();
+    next()
+});
+
+router.afterEach(() => Nprogress.done());
+
+export default router
