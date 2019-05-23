@@ -24,16 +24,23 @@
         methods:{
             ...mapActions(['verifyBVN']),
             bvnProcessor () {
-                Nprogress.start();
-                this.verifyBVN(this.bvn)
-                    .then(()=> {
-                        this.bvn = null;
-                        Nprogress.done();
-                    })
-                    .catch( () => {
-                        this.bvn = null;
-                        Nprogress.done();
-                    })
+                if(this.verifyInput(this.bvn)){
+                    Nprogress.start();
+                    this.verifyBVN(this.bvn)
+                        .then(()=> {
+                            this.bvn = null;
+                            Nprogress.done();
+                        })
+                        .catch( () => {
+                            this.bvn = null;
+                            Nprogress.done();
+                        })
+                } else {
+                    this.$store.dispatch('notification/add', {type: 'error', message: 'Invalid BVN. Kindly check your input'});
+                }
+            },
+            verifyInput(bvn){
+                    return bvn >= 0 && bvn.toString().length === 11;
             }
         },
     }
