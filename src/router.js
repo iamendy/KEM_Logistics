@@ -39,7 +39,6 @@ const router = new Router({
           path: '/payment-failed',
           name: 'payment-failed',
           component: PaymentFailed,
-          props: true
       },
       {
           path: '*',

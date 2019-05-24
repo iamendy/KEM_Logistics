@@ -11,10 +11,15 @@ export default new Vuex.Store({
     state: {
         user: {
             id: 'abc123',
-            email: 'hr@flutterwave.com',
-            country: 'Nigeria'
+            firstname: 'Nnamdi',
+            lastname: 'Umeh',
+            phone: '07066425471',
+            email: 'endeking@gmail.com',
+            country: 'Nigeria',
+            currency: 'NGN',
         },
-        secret: 'FLWSECK_TEST-d60af79fbfe92041372aebda9dffadff-X',
+        public_key: 'FLWPUBK-8c95ebea5cae616a1504fc0ba4b92ba4-X', //For payment processing
+        secret: 'FLWSECK_TEST-d60af79fbfe92041372aebda9dffadff-X', //for BVN Verification
         bvn: {},
     },
     mutations: {
@@ -36,7 +41,6 @@ export default new Vuex.Store({
                         type: 'error',
                         message: 'Ooops!! We couldn\'t verify your BVN'
                     };
-                    console.log(err);
                     dispatch('notification/add', notification);
                     throw err;
                 })

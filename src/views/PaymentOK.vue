@@ -4,14 +4,14 @@
         <h6>A receipt has also been sent to your email. We hope to see you again.</h6>
 
         <br> <br>
-        <i style="color: #ccc"> Here's how the payment is split between the driver and KEM Logistics</i>
+        <i style="color: #ccc"> Here's how the payment is split between the driver and KEM Logistics [90%, 10%] respectively</i>
 
         <br><br>
         <div class="summary">
             <h6>Amount paid: N{{summary.tx.amount}}</h6>
-            <h6> Rave Fees: N{{summary.tx.appfee}} @ 1.4% </h6>
-            <h6>KLog share: N{{kLog}} @ 10% </h6>
+            <h6> Rave Fees: N{{raveFee}} @ 1.4% </h6>
             <h6>Driver(Lola Adeogun) share: N{{driver}} @ 90% </h6>
+            <h6>KLog share: N{{kLog}} @ 10% </h6>
         </div>
     </div>
 </template>
@@ -21,12 +21,17 @@
             summary: {
                 type: Object,
                 required: true
+            },
+            txRef: {
+                type: String,
+                required: true
             }
         },
         data() {
             return {
                 driver: null,
-                kLog: null
+                kLog: null,
+                raveFee: null,
             }
         },
         created() {
@@ -34,9 +39,10 @@
         },
         methods: {
             calculateSplitPayment() {
-                //(total amount - (rave fees + commission)
+                //(total amount - (rave fee + commission)
                 this.kLog = 0.1 * this.summary.tx.amount;
-                this.driver = this.summary.tx.amount - (this.summary.tx.appfee + this.kLog);
+                this.raveFee = this.summary.tx.appfee;
+                this.driver = this.summary.tx.amount - (this.raveFee + this.kLog);
             }
         }
     }

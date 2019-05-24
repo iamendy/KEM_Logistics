@@ -2,13 +2,13 @@
     <div>
         <h4> WE'VE ARRIVED! </h4>
         <h5> We do hope you enjoyed the ride! Now here's your route summary and bill:</h5>
-        <p><i class="fa fa-user-tag space"></i> Your Rider: <i>Lola Adeogun </i> </p>
+        <h6><i class="fa fa-user-tag space"></i> Your Rider: <i>Lola Adeogun </i></h6>
         <div>
-            <p><i class="fa fa-ticket-alt space"></i> Invoice ID: {{myRef}}</p>
-            <p><i class="fa fa-route space"></i> 8 Providence Street, Lekki - 10 Greenville estate, Ajah</p>
-            <p><i class="fa fa-clock space"></i> Duration: 30mins</p>
-            <p><i class="fa fa-motorcycle space"></i> Distance: 24km </p>
-            <p><i class="fa fa-money-bill-alt space"></i> Amount: N1500</p>
+            <h6><i class="fa fa-ticket-alt space"></i> Invoice ID: {{myRef}}</h6>
+            <h6><i class="fa fa-route space"></i> 8 Providence Street, Lekki - 10 Greenville estate, Ajah</h6>
+            <h6><i class="fa fa-clock space"></i> Duration: 30mins</h6>
+            <h6><i class="fa fa-motorcycle space"></i> Distance: 24km </h6>
+            <h6><i class="fa fa-money-bill-alt space"></i> Amount: N1500</h6>
         </div>
 
         <div class="btn-wrapper">
@@ -16,32 +16,38 @@
         </div>
 
         <br> <br>
-        <i style="color: #ccc"> This is the customer app page. When He/She clicks on "pay for ride button', and makes payment, the Payment will be split as defined by KEM Logistics their drivers</i>
+        <div class="info">
+            <i> This is the customer page after ride. When the customer clicks on "pay for ride' button,
+            and makes
+            payment successfully, the amount will be split(as defined by K Log) between K Log and the driver. (Click
+            'Pay for ride' to Proceed)</i>
+        </div>
         <br>
     </div>
 </template>
 
 <script>
     import router from '../router';
+    import {mapState} from 'vuex';
+
     export default {
         name: "Payment",
-        data() {
-            return {
-                ride_summary: {},
-                apiPublickey: 'FLWPUBK-8c95ebea5cae616a1504fc0ba4b92ba4-X',
-                myRef: this.refGenerator()
-            }
+        computed: {
+            myRef() {
+                return this.refGenerator()
+            },
+            ...mapState(['user', 'public_key'])
         },
         methods: {
             payWithRave() {
-                var x = getpaidSetup({
-                    PBFPubKey: this.apiPublickey,
-                    customer_email: "me@example.com",
+                let x = getpaidSetup({
+                    PBFPubKey: this.public_key,
+                    customer_email: this.user.email,
                     amount: 1500,
-                    currency: "NGN",
-                    customer_phone: '07066425471',
-                    customer_firstname: 'Nnamdi',
-                    customer_lastname: 'Umeh',
+                    currency: this.user.currency,
+                    customer_phone: this.user.phone,
+                    customer_firstname: this.user.firstname,
+                    customer_lastname: this.user.lastname,
                     txref: this.myRef,
                     subaccounts: [
                         {
@@ -54,41 +60,37 @@
                         metaname: "BikeID",
                         metavalue: "KL151"
                     }],
-                    onclose: function () {
+                    onclose: () => {
                     },
                     callback: function (response) {
-                        if (
-                            response.tx.chargeResponseCode === "00" ||
-                            response.tx.chargeResponseCode === "0"
-                        ) {
-                            router.push({
-                                name: 'payment-ok',
-                                params: { summary: response }
-                            })
-                        } else {
-                            router.push({
-                                name: 'payment-failed',
-                                params: { summary: response }
-                            })
-                        }
+                        if (response.tx.chargeResponseCode === "00" || response.tx.chargeResponseCode === "0") {
+                            //extra validation
+                            if (response.tx.txRef === this.txref && response.tx.amount === this.amount) {
+                                router.push({
+                                    name: 'payment-ok',
+                                    params: {summary: response}
+                                })
+                            } else {
+                                router.push({
+                                    name: 'payment-failed',
+                                })
+                            }
+                        } else{
 
+                        }
                         x.close();
                     }
                 })
             },
-            refGenerator(){
-                    let text = "";
-                    let possible = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjklmnpqrstuvwxyz123456789";
+            refGenerator() {
+                let text = "";
+                let possible = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjklmnpqrstuvwxyz123456789";
 
-                    for( let i=0; i < 10; i++ )
-                        text += possible.charAt(Math.floor(Math.random() * possible.length));
+                for (let i = 0; i < 10; i++)
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-                    return text;
+                return text;
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h4> BVN Checker </h4>
-        <h6> We want you to have a seamless payment experience. So here's a BVN checker to ensure nothing goes wrong in the future</h6>
+        <h4> BVN Verification </h4>
+        <h6> We want you to have a seamless payment experience. So here's a BVN Verifier to ensure nothing goes wrong in the future</h6>
         <form @submit.prevent="bvnProcessor">
         <input type="number" v-model.number="bvn" required>
         <div class="btn-wrapper">
@@ -12,8 +12,9 @@
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex';
+    import {mapActions} from 'vuex';
     import Nprogress from 'nprogress'
+
     export default {
         name: "BvnChecker",
         data(){
@@ -45,7 +46,3 @@
         },
     }
 </script>
-
-<style scoped>
-
-</style>
