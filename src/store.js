@@ -14,7 +14,7 @@ export default new Vuex.Store({
             email: 'hr@flutterwave.com',
             country: 'Nigeria'
         },
-        secret: 'FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X',
+        secret: 'FLWSECK_TEST-d60af79fbfe92041372aebda9dffadff-X',
         bvn: {},
     },
     mutations: {
@@ -36,6 +36,7 @@ export default new Vuex.Store({
                         type: 'error',
                         message: 'Ooops!! We couldn\'t verify your BVN'
                     };
+                    console.log(err);
                     dispatch('notification/add', notification);
                     throw err;
                 })
