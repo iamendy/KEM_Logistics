@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import api from './services/APIService'
+import bvnAPI from './services/bvnVerificationAPI'
+import paymentAPI from './services/paymentVerificationAPI';
 import notification from './modules/notification'
 Vue.use(Vuex);
 
@@ -27,7 +28,7 @@ export default new Vuex.Store({
     },
     actions: {
         verifyBVN({state, commit, dispatch}, bvn) {
-            return api.verifyBVN(bvn, state.secret)
+            return bvnAPI.verifyBVN(bvn, state.secret)
                 .then( ({data}) => {
                     const notification = {
                         type: 'success',
@@ -44,6 +45,9 @@ export default new Vuex.Store({
                     dispatch('notification/add', notification);
                     throw err;
                 })
+        },
+        verifyPayment({commit}, payload){
+            return paymentAPI.verifyPayment(payload)
         }
     }
 })

@@ -2,15 +2,11 @@
   <div id="nav" class="nav">
     <router-link :to="{ name: 'home' }" class="brand"> KLog </router-link>
     <nav>
-      <router-link :to="{ name: 'bvn' }"> BVN Verification </router-link> <b>|</b>
-      <router-link :to="{ name: 'payment' }"> Pay for ride </router-link>
+      <router-link :to="{ name: 'bvn' }" class="nav-item"> BVN Verification </router-link> <b>|</b>
+      <router-link :to="{ name: 'payment' }" class="nav-item"> Pay for ride </router-link>
     </nav>
   </div>
 </template>
-
-<script>
-export default {}
-</script>
 
 <style scoped>
 .nav {

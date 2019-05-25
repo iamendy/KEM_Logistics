@@ -6,14 +6,15 @@
             <h1><i class="fa fa-hand-peace .h1"></i></h1>
         </div>
         <br> <br>
-        <i style="color: #ccc"> Here's how the payment is split between the driver and KEM Logistics [90%, 10%] respectively</i>
-
+        <i style="color: #ccc"> Here's how the payment is split between the driver and KEM Logistics [90%, 10%]
+            respectively</i>
         <br><br>
         <div class="summary">
-            <h6>Amount paid: N{{summary.tx.amount}}</h6>
-            <h6> Rave Fees: N{{raveFee}} @ 1.4% </h6>
-            <h6>Driver(Lola Adeogun) share: N{{driver}} @ 90% </h6>
-            <h6>KLog share: N{{kLog}} @ 10% </h6>
+            <h6>Amount paid: N{{this.summary.data.chargedamount}}</h6>
+            <h6>invoice id: N{{this.summary.data.txref}}</h6>
+            <h6> Rave Fees: N{{this.summary.data.appfee}}</h6>
+            <h6>Driver(Lola Adeogun) share: N{{driverCommission}} </h6>
+            <h6>KLog Commission: N{{merchantCommission}} </h6>
         </div>
     </div>
 </template>
@@ -24,28 +25,18 @@
                 type: Object,
                 required: true
             },
-            txRef: {
-                type: String,
-                required: true
-            }
         },
-        data() {
-            return {
-                driver: null,
-                kLog: null,
-                raveFee: null,
-            }
+        computed: {
+            subAccountID(){
+                let x = JSON.parse(this.summary.data.meta[2].metavalue);
+                return  x.RS_92DF547567BF7B558ACE8174A91662A2
+            },
+            merchantCommission() {
+                return this.subAccountID.merchant_commission
+            },
+            driverCommission() {
+                return this.subAccountID.subaccount_earning
+            },
         },
-        created() {
-            this.calculateSplitPayment();
-        },
-        methods: {
-            calculateSplitPayment() {
-                //(total amount - (rave fee + commission)
-                this.kLog = 0.1 * this.summary.tx.amount;
-                this.raveFee = this.summary.tx.appfee;
-                this.driver = this.summary.tx.amount - (this.raveFee + this.kLog);
-            }
-        }
     }
 </script>

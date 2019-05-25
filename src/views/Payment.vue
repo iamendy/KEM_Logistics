@@ -18,8 +18,9 @@
         <br> <br>
         <div class="info">
             <i> This is the customer page after ride. When the customer clicks on "pay for ride' button,
-            and makes payment successfully, the amount will be split(as defined by K Log) between K Log and the driver using <b>Rave Split Payment API.</b> (Click
-            'Pay for Ride' to Proceed) </i>
+                and makes payment successfully, the amount will be split(as defined by K Log) between K Log and the
+                driver using <b>Rave Split Payment API.</b> (Click
+                'Pay for Ride' to Proceed) </i>
         </div>
         <br>
     </div>
@@ -31,6 +32,11 @@
 
     export default {
         name: "Payment",
+        data(){
+            return {
+                amount: 1500
+            }
+        },
         computed: {
             myRef() {
                 return this.refGenerator()
@@ -42,7 +48,7 @@
                 let x = getpaidSetup({
                     PBFPubKey: this.public_key,
                     customer_email: this.user.email,
-                    amount: 1500,
+                    amount: this.amount,
                     currency: this.user.currency,
                     customer_phone: this.user.phone,
                     customer_firstname: this.user.firstname,
@@ -61,21 +67,24 @@
                     }],
                     onclose: () => {
                     },
-                    callback: function (response) {
+                    callback: (response) => {
+                        //verification data
+                        let request = {
+                            amount: this.amount,
+                            currency: this.user.currency,
+                            txref: this.myRef
+                        };
                         if (response.tx.chargeResponseCode === "00" || response.tx.chargeResponseCode === "0") {
-                            //extra validation
-                            if (response.tx.txRef === this.txref && response.tx.amount === this.amount) {
-                                router.push({
-                                    name: 'payment-ok',
-                                    params: {summary: response}
-                                })
-                            } else {
-                                router.push({
-                                    name: 'payment-failed',
-                                })
-                            }
-                        } else{
-
+                            //validation url
+                            router.push({
+                                name: 'payment-verification',
+                                params: {request: request}
+                            })
+                        } else {
+                            router.push({
+                                name: 'payment-failed',
+                                params: {message: 'We could not process your request at this time. Please try again later'}
+                            })
                         }
                         x.close();
                     }
