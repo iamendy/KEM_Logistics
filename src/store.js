@@ -18,8 +18,8 @@ export default new Vuex.Store({
             country: 'Nigeria',
             currency: 'NGN',
         },
-        public_key: 'FLWPUBK-8c95ebea5cae616a1504fc0ba4b92ba4-X', //For payment processing
-        secret: 'FLWSECK_TEST-d60af79fbfe92041372aebda9dffadff-X', //for BVN Verification
+        public_key: 'FLWPUBK-d35406e9f177ea2f4205680aafe0f239-X', //For payment processing
+        secret: 'FLWSECK-114ccc07bb309dc90e6aa2084e92354a-X', //for BVN Verification
         bvn: {},
     },
     mutations: {

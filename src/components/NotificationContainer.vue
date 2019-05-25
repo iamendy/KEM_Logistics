@@ -32,5 +32,6 @@
         font-weight: 600;
         box-shadow: 2px 2px #39b982;
         width: 300px;
+        z-index: 1000;
     }
 </style>

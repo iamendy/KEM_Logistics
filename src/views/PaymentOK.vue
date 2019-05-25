@@ -1,8 +1,10 @@
 <template>
     <div>
-        <h4>Thanks for choosing us! <i class="fa fa-hand-peace"></i></h4>
+        <h4>Thanks for choosing us!</h4>
         <h6>A receipt has also been sent to your email. We hope to see you again.</h6>
-
+        <div class="center">
+            <h1><i class="fa fa-hand-peace .h1"></i></h1>
+        </div>
         <br> <br>
         <i style="color: #ccc"> Here's how the payment is split between the driver and KEM Logistics [90%, 10%] respectively</i>
 

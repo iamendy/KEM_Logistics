@@ -18,9 +18,8 @@
         <br> <br>
         <div class="info">
             <i> This is the customer page after ride. When the customer clicks on "pay for ride' button,
-            and makes
-            payment successfully, the amount will be split(as defined by K Log) between K Log and the driver. (Click
-            'Pay for ride' to Proceed)</i>
+            and makes payment successfully, the amount will be split(as defined by K Log) between K Log and the driver using Rave Split Payment API. (Click
+            'Pay for Ride' to Proceed) </i>
         </div>
         <br>
     </div>
