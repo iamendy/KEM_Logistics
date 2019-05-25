@@ -2,13 +2,13 @@
     <div>
         <h4> WE'VE ARRIVED! </h4>
         <h5> We do hope you enjoyed the ride! Now here's your route summary and bill:</h5>
-        <h6><i class="fa fa-user-tag space"></i> Your Rider: <i>Lola Adeogun </i></h6>
+        <hp><i class="fa fa-user-tag space"></i> Your Rider: <i>Lola Adeogun </i></hp>
         <div>
-            <h6><i class="fa fa-ticket-alt space"></i> Invoice ID: {{myRef}}</h6>
-            <h6><i class="fa fa-route space"></i> 8 Providence Street, Lekki - 10 Greenville estate, Ajah</h6>
-            <h6><i class="fa fa-clock space"></i> Duration: 30mins</h6>
-            <h6><i class="fa fa-motorcycle space"></i> Distance: 24km </h6>
-            <h6><i class="fa fa-money-bill-alt space"></i> Amount: N1500</h6>
+            <p><i class="fa fa-ticket-alt space"></i> Invoice ID: {{myRef}} </p>
+            <p><i class="fa fa-route space"></i> 8 Providence Street, Lekki - 10 Greenville estate, Ajah</p>
+            <p><i class="fa fa-clock space"></i> Duration: 30mins</p>
+            <p><i class="fa fa-motorcycle space"></i> Distance: 24km </p>
+            <p><i class="fa fa-money-bill-alt space"></i> Amount: N1500</p>
         </div>
 
         <div class="btn-wrapper">
@@ -18,7 +18,7 @@
         <br> <br>
         <div class="info">
             <i> This is the customer page after ride. When the customer clicks on "pay for ride' button,
-            and makes payment successfully, the amount will be split(as defined by K Log) between K Log and the driver using Rave Split Payment API. (Click
+            and makes payment successfully, the amount will be split(as defined by K Log) between K Log and the driver using <b>Rave Split Payment API.</b> (Click
             'Pay for Ride' to Proceed) </i>
         </div>
         <br>

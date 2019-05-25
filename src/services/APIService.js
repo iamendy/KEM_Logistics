@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: `https://api.ravepay.co/v2/kyc/bvn`,
+  baseURL: `https://ravesandboxapi.flutterwave.com/v2/kyc/bvn`,
   withCredentials: false,
   headers: {
     Accept: 'application/json',
