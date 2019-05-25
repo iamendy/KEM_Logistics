@@ -2,7 +2,7 @@
     <div>
         <h4> WE'VE ARRIVED! </h4>
         <h5> We do hope you enjoyed the ride! Now here's your route summary and bill:</h5>
-        <hp><i class="fa fa-user-tag space"></i> Your Rider: <i>Lola Adeogun </i></hp>
+        <p><i class="fa fa-user-tag space"></i> Your Rider: <i>Lola Adeogun </i></p>
         <div>
             <p><i class="fa fa-ticket-alt space"></i> Invoice ID: {{myRef}} </p>
             <p><i class="fa fa-route space"></i> 8 Providence Street, Lekki - 10 Greenville estate, Ajah</p>
