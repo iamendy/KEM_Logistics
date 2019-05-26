@@ -27,7 +27,7 @@
                     SECKEY: this.secret,
                     txref: this.request.txref
                 };
-                //verification
+                //Using an action to post payload to RAVE verification url
                 this.verifyPayment(payload)
                     .then(({data}) => {
                         if (
@@ -47,6 +47,7 @@
                                 }
                             })
                         } else {
+                            //invalidated response
                             router.push({
                                 name: 'payment-failed',
                                 params: {
@@ -55,7 +56,14 @@
                             })
                         }
                     })
-                    .catch(err => console.log(err))
+                    .catch(() => {
+                        router.push({
+                            name: 'payment-failed',
+                            params: {
+                                message: 'An Error occurred while trying to verify your payment. Please try again'
+                            }
+                        })
+                    })
             }
         }
     }

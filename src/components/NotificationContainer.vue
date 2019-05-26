@@ -28,9 +28,9 @@
         position: fixed;
         bottom: 10px;
         right: 0;
-        background: linear-gradient(to right, #16c0b0, #84cf6a);
+        background: #231B70;
         font-weight: 600;
-        box-shadow: 2px 2px #39b982;
+        box-shadow: 2px 2px #fff;
         width: 300px;
         z-index: 1000;
     }
