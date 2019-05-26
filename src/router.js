@@ -5,7 +5,7 @@ import Payment from './views/Payment.vue'
 import BVN from './views/BvnChecker.vue'
 import PaymentOK from './views/PaymentOK.vue'
 import PaymentFailed from './views/PaymentFailed.vue'
-import PaymentVerification from './views/PaymentVerification.vue'
+//import PaymentVerification from './views/PaymentVerification.vue'
 import Error404 from './views/Error404.vue'
 import Nprogress from 'nprogress';
 
@@ -36,12 +36,12 @@ const router = new Router({
           component: PaymentOK,
           props: true
       },
-      {
+      /*{
           path: '/payment-verification',
           name: 'payment-verification',
           component: PaymentVerification,
           props: true
-      },
+      },*/
       {
           path: '/payment-failed',
           name: 'payment-failed',

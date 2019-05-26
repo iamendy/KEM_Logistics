@@ -11,6 +11,11 @@
         </section>
         <!--================Hero Banner Area End =================-->
 
+        <div class="box" v-show="processing">
+            <div class="spinner spinner--4"></div>
+        </div>
+
+
         <div class="wrapper mb-5">
             <div class="profile-card js-profile-card">
                 <div class="profile-card__img">
@@ -19,7 +24,8 @@
 
                 <div class="profile-card__cnt js-profile-cnt">
                     <div class="profile-card__name">Lola Adeogun</div>
-                    <div class="profile-card__txt">  <b> <i class="ti-star"></i>  <i class="ti-star"></i>  <i class="ti-star"></i>  <i class="ti-star"></i></b> <i class="ti-star"></i></div>
+                    <div class="profile-card__txt"><b> <i class="ti-star"></i> <i class="ti-star"></i> <i
+                            class="ti-star"></i> <i class="ti-star"></i></b> <i class="ti-star"></i></div>
                     <div class="profile-card-loc">
                         <span class="profile-card-loc__txt">NGN 1500</span>
                     </div>
@@ -32,7 +38,7 @@
 
                         <div class="profile-card-inf__item">
                             <div class="profile-card-inf__title"><i class="ti-map-alt"></i></div>
-                            <div class="profile-card-inf__txt"> 9 Barracks  - 8 Badagry Road </div>
+                            <div class="profile-card-inf__txt"> 9 Barracks - 8 Badagry Road</div>
                         </div>
 
                         <div class="profile-card-inf__item">
@@ -41,7 +47,7 @@
                         </div>
 
                         <div class="profile-card-inf__item">
-                            <div class="profile-card-inf__title"> <i class="ti-car"></i> </div>
+                            <div class="profile-card-inf__title"><i class="ti-car"></i></div>
                             <div class="profile-card-inf__txt">30km</div>
                         </div>
                     </div>
@@ -58,22 +64,24 @@
 
 <script>
     import router from '../router';
-    import {mapState} from 'vuex';
+    import {mapActions, mapState} from 'vuex';
 
     export default {
         name: "Payment",
-        data(){
+        data() {
             return {
-                amount: 1500
+                amount: 1500,
+                processing: true
             }
         },
         computed: {
             myRef() {
                 return this.refGenerator()
             },
-            ...mapState(['user', 'public_key'])
+            ...mapState(['user', 'public_key', 'secret'])
         },
         methods: {
+            ...mapActions(['verifyPayment']),
             payWithRave() {
                 let x = getpaidSetup({
                     PBFPubKey: this.public_key,
@@ -102,14 +110,25 @@
                         let request = {
                             amount: this.amount,
                             currency: this.user.currency,
-                            txref: this.myRef
+                            txref: this.myRef,
                         };
                         if (response.tx.chargeResponseCode === "00" || response.tx.chargeResponseCode === "0") {
-                            //mocking server validation url
-                            router.push({
-                                name: 'payment-verification',
-                                params: {request: request}
-                            })
+                            //Server validation action
+                            this.processing = true;
+                            this.verifyPayment(request)
+                                .then(res => {
+                                    //redirect to confirmation page
+                                    router.push({
+                                        name: 'payment-ok',
+                                        params: {
+                                            summary: res.data.data
+                                        }
+                                    })
+                                })
+                                .catch(err => {
+                                    this.processing = false;
+                                    console.log(err)
+                                })
                         } else {
                             router.push({
                                 name: 'payment-failed',
@@ -132,3 +151,34 @@
         },
     }
 </script>
+<style>
+    .box {
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        box-shadow: 0 0 1px rgba(0, 0, 0, .8);
+        position: relative;
+        z-index: 5000;
+    }
+
+    .box .spinner {
+        height: 40px;
+        width: 40px;
+        background: rgba(0, 0, 0, .2);
+        border-radius: 50%;
+    }
+
+    .box .spinner--4 {
+        transform: scale(0);
+        background: rgba(0, 0, 0, .8);
+        opacity: 1;
+        animation: spinner4 800ms linear infinite;
+    }
+
+    @keyframes spinner4 {
+        to {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>

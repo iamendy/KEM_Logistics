@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-    baseURL: `https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/v2`,
+    baseURL: `http://localhost:5000`,
     withCredentials: false,
     headers: {
         Accept: 'application/json',
@@ -11,6 +11,6 @@ const apiClient = axios.create({
 
 export default {
     verifyPayment(payload) {
-        return apiClient.post('/verify', payload)
+        return apiClient.post('/payment-verification', payload)
     },
 }
