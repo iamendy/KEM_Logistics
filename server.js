@@ -10,6 +10,12 @@ const app = express();
 app.use(secure);
 app.use('/', serveStatic( path.join(__dirname, '/dist')));
 
+//validation for Rave Payment API
+app.get('/payment-verification', (req, res) => {
+    res.send('I see you bro')
+});
+
+
 // Catch all routes and redirect to the index file
 app.get('*', function (req, res) {
     res.sendFile(__dirname + '/dist/index.html')

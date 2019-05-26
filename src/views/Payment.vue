@@ -1,28 +1,58 @@
 <template>
     <div>
-        <h4> WE'VE ARRIVED! </h4>
-        <h5> We do hope you enjoyed the ride! Now here's your route summary and bill:</h5>
-        <p><i class="fa fa-user-tag space"></i> Your Rider: <i>Lola Adeogun </i></p>
-        <div>
-            <p><i class="fa fa-ticket-alt space"></i> Invoice ID: {{myRef}} </p>
-            <p><i class="fa fa-route space"></i> 8 Providence Street, Lekki - 10 Greenville estate, Ajah</p>
-            <p><i class="fa fa-clock space"></i> Duration: 30mins</p>
-            <p><i class="fa fa-motorcycle space"></i> Distance: 24km </p>
-            <p><i class="fa fa-money-bill-alt space"></i> Amount: N1500</p>
-        </div>
+        <!--================Hero Banner Area Start =================-->
+        <section class="hero-banner d-flex align-items-center">
+            <div class="container text-center">
+                <h2>WE'VE ARRIVED!</h2>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    Hope you enjoyed the ride?
+                </nav>
+            </div>
+        </section>
+        <!--================Hero Banner Area End =================-->
 
-        <div class="btn-wrapper">
-            <button class="button -fill-gradient" type="button" @click="payWithRave">Pay for Ride</button>
-        </div>
+        <div class="wrapper mb-5">
+            <div class="profile-card js-profile-card">
+                <div class="profile-card__img">
+                    <img src="../assets/img/driver.jpg" alt="profile card">
+                </div>
 
-        <br> <br>
-        <div class="info">
-            <i> This is the customer page after ride. When the customer clicks on "pay for ride' button,
-                and makes payment successfully, the amount will be split(as defined by K Log) between K Log and the
-                driver using <b>Rave Split Payment API.</b> (Click
-                'Pay for Ride' to Proceed) </i>
+                <div class="profile-card__cnt js-profile-cnt">
+                    <div class="profile-card__name">Lola Adeogun</div>
+                    <div class="profile-card__txt">  <b> <i class="ti-star"></i>  <i class="ti-star"></i>  <i class="ti-star"></i>  <i class="ti-star"></i></b> <i class="ti-star"></i></div>
+                    <div class="profile-card-loc">
+                        <span class="profile-card-loc__txt">NGN 1500</span>
+                    </div>
+
+                    <div class="profile-card-inf">
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title"><i class="ti-link"></i></div>
+                            <div class="profile-card-inf__txt">{{myRef}}</div>
+                        </div>
+
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title"><i class="ti-map-alt"></i></div>
+                            <div class="profile-card-inf__txt"> 9 Barracks  - 8 Badagry Road </div>
+                        </div>
+
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title"><i class="ti-time"></i></div>
+                            <div class="profile-card-inf__txt">25minutes</div>
+                        </div>
+
+                        <div class="profile-card-inf__item">
+                            <div class="profile-card-inf__title"> <i class="ti-car"></i> </div>
+                            <div class="profile-card-inf__txt">30km</div>
+                        </div>
+                    </div>
+
+                    <div class="profile-card-ctr" style="text-align: center">
+                        <button class="btn btn--primary uppercase --separate" @click="payWithRave">Pay for Ride</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <br>
     </div>
 </template>
 
@@ -75,7 +105,7 @@
                             txref: this.myRef
                         };
                         if (response.tx.chargeResponseCode === "00" || response.tx.chargeResponseCode === "0") {
-                            //validation url
+                            //mocking server validation url
                             router.push({
                                 name: 'payment-verification',
                                 params: {request: request}
@@ -98,7 +128,7 @@
                     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
                 return text;
-            }
-        }
+            },
+        },
     }
 </script>

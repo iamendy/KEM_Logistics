@@ -1,35 +1,38 @@
 <template>
-  <div id="nav" class="nav">
-    <router-link :to="{ name: 'home' }" class="brand"> KLog </router-link>
-    <nav>
-      <router-link :to="{ name: 'bvn' }" class="nav-item"> BVN Verification </router-link> <b>|</b>
-      <router-link :to="{ name: 'payment' }" class="nav-item"> Pay for ride </router-link>
-    </nav>
+  <div id="nav">
+      <!--================Header Menu Area =================-->
+      <header class="header_area">
+          <div class="main_menu">
+              <nav class="navbar navbar-expand-lg navbar-light">
+                  <div class="container">
+                      <!-- Brand and toggle get grouped for better mobile display -->
+                      <router-link :to="{ name: 'home' }" class="navbar-brand logo_h"> KLog </router-link>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                      <!-- Collect the nav links, forms, and other content for toggling -->
+                      <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                          <ul class="nav navbar-nav menu_nav ml-auto">
+                              <li class="nav-item"> <a href="https://github.com/iamendy/KEM_Logistics" target="_blank" class="nav-link"> Github Repo </a> </li>
+                              <li class="nav-item"><router-link :to="{ name: 'payment' }" class="nav-link"> Pay for ride </router-link></li>
+                          </ul>
+                      </div>
+                      <div class="right-button">
+                          <ul>
+                              <li class="nav-item"> <router-link :to="{ name: 'bvn' }" class="sign_up"> BVN Verification </router-link> </li>
+                          </ul>
+                      </div>
+                  </div>
+              </nav>
+          </div>
+      </header>
+      <!--================Header Menu Area =================-->
   </div>
 </template>
-
-<style scoped>
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-}
-.nav > .brand {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.5em;
-  color: #39b982;
-  text-decoration: none;
-}
-.nav .nav-item {
-  box-sizing: border-box;
-  margin: 0 5px;
-  color: rgba(0, 0, 0, 0.5);
-  text-decoration: none;
-}
-.nav .nav-item.router-link-exact-active {
-  color: #39b982;
-  border-bottom: solid 2px #39b982;
-}
-</style>
+<script>
+    export default{
+        name: 'NavBar'
+    }
+</script>

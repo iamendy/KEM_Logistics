@@ -1,13 +1,28 @@
 <template>
     <div>
-        <h4> BVN Verification </h4>
-        <h6> We want you to have a seamless payment experience. So here's a BVN Verifier to ensure nothing goes wrong in the future</h6>
-        <form @submit.prevent="bvnProcessor">
-        <input type="number" v-model.number="bvn" required>
-        <div class="btn-wrapper">
-            <button class="button -fill-gradient" :disabled="processing"> Verify my BVN </button>
-        </div>
-        </form>
+        <!--================Hero Banner Area Start =================-->
+        <section class="hero-banner d-flex align-items-center">
+            <div class="container text-center">
+                <h2>VERIFY YOUR BVN</h2>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    To open up full access features!
+                </nav>
+            </div>
+        </section>
+        <!--================Hero Banner Area End =================-->
+
+        <!--================Blog Area =================-->
+        <section class="blog_area area-padding">
+            <div class="container">
+                <div class="bvn">
+                    <form class="form">
+                        <input v-model.number="bvn" type="number" class="form__field" placeholder="Enter your BVN"/>
+                        <button type="button" class="btn btn--primary btn--inside uppercase" :disabled="processing" @click="bvnProcessor" > {{ processing ? 'verifying' : 'verify' }} </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
     </div>
 </template>
 

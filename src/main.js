@@ -3,7 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'nprogress/nprogress.css'
-import './assets/styles.css'
+import './assets/style.css'
+import './assets/responsive.css'
+import './assets/themify-icons.css'
 
 Vue.config.productionTip = false;
 
