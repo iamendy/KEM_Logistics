@@ -24,15 +24,16 @@
 
         <nav aria-label="Page navigation example">
             <ul class="pagination text-center">
-                <li v-if="result.previous_page" class="page-item"><a class="page-link" @click="getMorePost(previous)">Previous Page</a></li>
+                <li v-if="previousPage" class="page-item"><a class="page-link" @click="getMorePost('previous')">Previous Page</a></li>
 
-                <li v-if="result.next_page" class="page-item"><a class="page-link" @click="getMorePost(next)">Next Page</a></li>
+                <li v-if="nextPage" class="page-item"><a class="page-link" @click="getMorePost('next')">Next Page</a></li>
             </ul>
         </nav>
         </div>
     </section>
 </template>
 <script>
+    import axios from 'axios';
     export default {
       data(){
         return{
@@ -47,23 +48,28 @@
                 required: true
             },
         },
-        /*computed: {
-            subAccountID(){
-                let x = JSON.parse(this.summary.data.meta[2].metavalue);
-                return  x.RS_92DF547567BF7B558ACE8174A91662A2
-            },
-        },*/
       methods:{
         parseResults: function () {
           this.photos = this.result.photos;
           this.nextPage = this.result.next_page ? this.result.next_page : null;
-          this.previousPage = this.result.previous_page ? this.result.previous_page : null
         },
-        getMorePosts: function(value){
+        getMorePost: function(value){
           if(value === 'next'){
-
-          } else {
-
+            axios.get(this.nextPage, { headers: {'Authorization': '563492ad6f91700001000001a133960b5f9544a78c93331665b2f58c'}})
+              .then(res => {
+                this.photos = res.data.photos;
+                this.previousPage = this.next_page ? this.next_page : null;
+                this.nextPage = this.result.next_page ? this.result.next_page : null;
+              })
+              .catch( err => console.log(err))
+          } else if(value === 'previous') {
+            axios.get(this.previousPage, { headers: {'Authorization': '563492ad6f91700001000001a133960b5f9544a78c93331665b2f58c'}})
+              .then(res => {
+                this.photos = res.data.photos;
+                this.nextPage = this.result.next_page ? this.result.next_page : null;
+                this.previousPage = this.result.previous_page ? this.result.previous_page : null
+              })
+              .catch(err => console.log(err))
           }
         }
       },
