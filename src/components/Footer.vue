@@ -18,16 +18,15 @@
                       <div class="footer-address">
                           <p>Address : 10 Greenville Estate, Ajah, Lagos, Nigeria.</p>
                           <span>Phone : +234 706 642 5471</span>
-                          <span>Email : Nnamdi@kemlogistics.com</span>
+                          <span>Email : Nnamdi@ncktech.com</span>
                       </div>
                   </div>
 
                   <div class="col-lg-4 col-md-8 mb-4 mb-xl-0 single-footer-widget">
-                      <h4>Secured</h4>
-                      <p>Accept payments, make payouts and manage your business funds from one integrated platform that helps you connect globally. Processing billions around the world.</p>
+                      <h4>Powered by</h4>
 
                       <div class="form-wrap" id="mc_embed_signup">
-                          <img src="../assets/img/flwbadge.png" alt="flutterwave logo">
+                          <img src="@/assets/img/pexels.png" alt="Pexels logo" style="width: 100px">
                       </div>
 
                   </div>

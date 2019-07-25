@@ -8,9 +8,15 @@
                     <div class="row">
                         <div class="col-lg-6 offset-lg-6 col-xl-5 offset-xl-7">
                             <div class="banner_content">
-                                <h3>More Than Just an App<br/>It's a lifestyle</h3>
-                                <p>We're connecting riders with the best local drivers at the best prices. When you ride with K Log, we do our best to make the ride as seamless and comfortable as possible.</p>
-                                <router-link :to="{ name: 'payment' }" class="banner_btn"> Book a Ride Now <i class="ti-arrow-right"></i> </router-link>
+                                <h3>Pexels just got<br/>more interesting</h3>
+                                <p>
+                                    Welcome to iPexels. We give you HD images for free!
+                                    Just enter a word, and iPexels will fetch related images, just for you!
+                                </p>
+                                <p>
+                                    <input type="text" v-model="search" class="input">
+                                </p>
+                                <a @click="processRequest" class="banner_btn"> Get me the photos </a>
                             </div>
                         </div>
 
@@ -19,56 +25,38 @@
             </div>
         </section>
         <!--================End Home Banner Area =================-->
-
-
-
-        <!--================About  Area =================-->
-        <section class="about-area area-padding-bottom">
-            <div class="container">
-                <div class="row align-items-center">
-
-                    <div class="col-lg-6">
-                        <div class="area-heading">
-                            <h4>Get home safely<br> and smarter </h4>
-                            <h6>Transportation isn’t the only thing we’re changing through our technology </h6>
-
-                            <p>In addition to helping you get from point A to point B, we're working to bring the future closer with self-driving technology and urban air transport, helping people order food quickly and affordably, and helping companies provide a seamless employee travel experience.</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <div class="single-about">
-                                    <div class="about-icon">
-                                        <i class="ti-car"></i>
-                                    </div>
-                                    <div class="single-about-content">
-                                        <h5>On Time Arrival</h5>
-                                        <p>Your safety is essential. That's our commitment, and technology is at the heart of our approach. </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-lg-6">
-                                <div class="single-about">
-                                    <div class="about-icon">
-                                        <i class="ti-thought"></i>
-                                    </div>
-                                    <div class="single-about-content">
-                                        <h5>Bespoke Comfort</h5>
-                                        <p>It’s our goal to create a cabin that is inclusive and where that authenticity is celebrated as a strength. </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--================About Area End =================-->
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'home',
+  import axios from 'axios';
+  import router from '../router';
+
+  export default {
+    name: 'home',
+    data() {
+      return {
+        search: ''
+      }
+    },
+    methods: {
+      processRequest: function () {
+        axios.get('https://api.pexels.com/v1/search?query=' + this.search +  '&per_page=20&page=1', {
+            headers: {
+              'Authorization': '563492ad6f91700001000001a133960b5f9544a78c93331665b2f58c'
+            }
+          }
+        )
+          .then(res => {
+            router.push({
+              name: 'payment-ok',
+              params: {
+                result: res.data
+              }
+            })
+          })
+          .catch(err => console.log(err))
+      }
     }
+  }
 </script>
